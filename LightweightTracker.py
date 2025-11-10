@@ -1,4 +1,4 @@
-class LightweightBuffer:
+class LwBuffer:
     """    Multiprocessing single-producer / single-consumer ring buffer.    - Kapasite sabit; dolunca en eskiyi EZER (lossy).    - Frame: sabit boy (H,W,C), dtype=uint8 (BGR).    - Zaman damgası: sabit uzunluklu UTF-8 string (örn: 'YYYY-MM-DD--HH:MM:SS.mmm').    """    def __init__(self, capacity: int, shape=(1080, 1920, 3), ts_maxlen: int = 32):
         assert capacity > 0        self.N = int(capacity)
         self.shape = tuple(shape)
@@ -113,7 +113,7 @@ class LightweightBuffer:
 
 from typing import List, Dict, Tuple
 
-class LightweightTracker:
+class LwTracker:
     """    Basit ama sağlamlaştırılmış çoklu-nesne takipçisi + Doğrulama (min_hits).    - min_hits: Bir iz (track) aynı nesneyi en az bu kadar kez gördüğünde "confirmed" olur.    - suppress_unconfirmed=True ise confirmed olmayan izler çıktı listesine hiç eklenmez.    - include_provisional_id=True ile confirmed olmayana 'provisional_id' ekleyebilirsin.    """    def __init__(
         self,
         iou_thresh: float = 0.30,
